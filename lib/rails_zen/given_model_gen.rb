@@ -17,13 +17,15 @@ module RailsZen
 
       attr_hash = attrs_with_types
 
-      i = 0
-      attr_hash.map do |attr, type|
+      final = []
+      i = -1
+      attr_hash.each do |attr, type|
         i += 1
         unless simple_attributes.include? "#{i}"
-          RailsZen::ChosenAttr.new(attr, type)
+          final << RailsZen::ChosenAttr.new(attr, type)
         end
       end
+      final
     end
 
     private

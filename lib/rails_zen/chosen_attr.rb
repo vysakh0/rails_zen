@@ -1,6 +1,8 @@
+require 'stringio'
+
 module RailsZen
   class ChosenAttr
-    attr_reader :name, :validator_line, :type, :validator, :type_based_validators, :scope_attr
+    attr_reader :name, :type, :validator, :type_based_validators, :scope_attr
 
     def initialize(name, type)
       @name = name
@@ -14,32 +16,37 @@ module RailsZen
     def get_presence_req
       puts "Must :#{name} be present always? Reply with y or n eg: y"
 
-      if gets.chomp.downcase == 'y'
+      if $stdin.gets.strip.downcase == 'y'
         puts "Setting presence true in your models and migrations"
 
         @validator = "validates_presence_of"
-        puts "What should be the default value? If there is no default value enter n"
-        val = gets.chomp
-        if val != 'n'
-          @default_value = val
-        end
-        uniqueness
+        #puts "What should be the default value? If there is no default value enter n"
+        #val = $stdin.gets.strip
+        #if val != 'n'
+        #@default_value = val
+        #end
+        get_uniqueness_req
         # append_to migration
       end
     end
 
     def get_uniqueness_req
       puts "Must :#{name} be unique? Reply with \n
-                  1 if it is unique with respect to another attr \n
-                  2 if it is just unique"
+                  1 if it is just unique \n
+                  2 if it is unique with respect to another attr \n
+                  n if it is not unique"
 
-      if gets.chomp == "1"
+      inp = $stdin.gets.strip
+
+      puts "this is the input"
+      puts inp
+      if inp == "2"
         #puts "Setting presence true in your models and migrations"
         puts "#{name} is unique along with ? Reply with attr name, if it is a relation reply along with id: eg: user_id "
-        @validator = "validates_uniqueness_of"
-        @scope_attr = gets.chomp
-      else
+        @scope_attr = $stdin.gets.strip
         @validator = "validates_uniqueness_scoped_to"
+      elsif  inp == "1"
+        @validator = "validates_uniqueness_of"
       end
     end
 
@@ -51,7 +58,7 @@ module RailsZen
                   1 just the numericality? \n
                   2 check if it is only integer\n
         "
-        input = gets.chomp
+        input = $stdin.gets.strip
 
         map_input = {
           "1" => "validate_numericality", "2" => "validate_integer"

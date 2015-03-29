@@ -22,15 +22,16 @@ RSpec.describe RailsZen::GivenModelGen do
         ])
       end
     end
-    #context "when no simple attributes is given by user" do
-      #it "returns attrs(object) that needs validations, extra specifications" do
+    context "when no simple attributes is given by user" do
 
-        #given_model_gen.simple_attributes = "0".split
-        #expect(given_model_gen.chosen_attrs).to match_array([
-          #an_object_having_attributes(class: RailsZen::ChosenAttr, name:"email", type: "string"),
-          #an_object_having_attributes(class: RailsZen::ChosenAttr, name:"phone", type: "integer")
-        #])
-      #end
-    #end
+      it "returns attrs(object) that needs validations, extra specifications except simple attributes" do
+
+        given_model_gen.simple_attributes = "0".split
+        expect(given_model_gen.chosen_attrs).to match_array([
+          an_object_having_attributes(class: RailsZen::ChosenAttr, name:"email", type: "string"),
+          an_object_having_attributes(class: RailsZen::ChosenAttr, name:"phone", type: "integer")
+        ])
+      end
+    end
   end
 end
