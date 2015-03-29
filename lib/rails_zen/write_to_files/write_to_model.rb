@@ -17,10 +17,12 @@ class RailsZen::WriteToModel
   end
 
   def write!
-    if type_num?
-      write_to_file(file_name, sends(@validator) + sends(@type_based_validators))
-    else
-      write_to_file file_name, sends(@validator)
+    if @validator
+      if type_num?
+        write_to_file(file_name, sends(@validator) + sends(@type_based_validators))
+      else
+        write_to_file file_name, sends(@validator)
+      end
     end
   end
 
@@ -33,13 +35,13 @@ class RailsZen::WriteToModel
     "app/models/#{@model_name}.rb"
   end
   def validates_presence_of
-     "validates :#{name}, presence: true"
+    "validates :#{name}, presence: true"
   end
   def validates_uniqueness_of
-     "validates :#{name}, presence: true, uniqueness: true"
+    "validates :#{name}, presence: true, uniqueness: true"
   end
   def validates_uniqueness_scoped_to
-     "validates_uniqueness_of :#{name}, scope: #{scope_attr}"
+    "validates_uniqueness_of :#{name}, scope: #{scope_attr}"
   end
 
 end

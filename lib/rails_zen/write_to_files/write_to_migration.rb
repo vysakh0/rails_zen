@@ -2,7 +2,7 @@ require 'write_to_model'
 class RailsZen::WriteToMigration < RailsZen::WriteToModel
 
   def write!
-    append_to_line file_name, sends(@validator)
+    append_to_line file_name, sends(@validator) if @validator
     if scope_attr
     write_to_file file_name, "t.index [:#{name}_id, #{scope_attr}]"
     end

@@ -26,7 +26,8 @@ module RailsZen
         #@default_value = val
         #end
         get_uniqueness_req
-        # append_to migration
+      else
+        @validator = nil
       end
     end
 

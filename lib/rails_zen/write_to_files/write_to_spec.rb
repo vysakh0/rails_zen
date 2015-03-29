@@ -4,7 +4,7 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
   include RailsZen::ModelLeveLValidationSpec
 
   def write!
-    write_to_file file_name, sends(@validator)
+    write_to_file file_name, sends(@validator) if @validator
     write_to_file file_name, sends(@type_based_validators) if @type_based_validators
   end
 
