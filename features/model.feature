@@ -26,9 +26,18 @@ Feature: Generate model related things
         And I type "n"
         Then the exit status should be 0
 
+    Scenario: not a unique attribute and a relation
+        When I run `rails_zen model g user name:string phone:integer location:belongs_to` interactively
+        And I type "0,1"
+        And I type "y"
+        Given I have all files
+        And I type "0"
+        Then the output should contain "0 if it is not unique"
+
     Scenario: unique attribute is a relation
         When I run `rails_zen model g user name:string phone:integer location:belongs_to` interactively
         And I type "0,1"
         And I type "y"
-        When I close the stdin stream
+        Given I have all files
+        And I type "1"
         Then the output should contain "0 if it is not unique"
