@@ -1,4 +1,5 @@
-require 'write_to_model'
+require "rails_zen/write_to_files/write_to_model"
+
 class RailsZen::WriteToMigration < RailsZen::WriteToModel
 
   def write!

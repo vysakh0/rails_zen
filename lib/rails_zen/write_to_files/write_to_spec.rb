@@ -1,4 +1,6 @@
-require 'write_to_model'
+require "rails_zen/write_to_files/model_level_validation_spec"
+require "rails_zen/write_to_files/write_to_model"
+
 class RailsZen::WriteToSpec < RailsZen::WriteToModel
 
   include RailsZen::ModelLeveLValidationSpec
@@ -23,4 +25,3 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
     "it { is_expected.to validates_uniqueness_of(:#{name}).scoped_to(:#{scope_attr})}"
   end
 end
-

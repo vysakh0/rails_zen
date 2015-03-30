@@ -2,7 +2,7 @@ require 'stringio'
 
 module RailsZen
   class ChosenAttr
-    attr_reader :name, :type, :validator, :type_based_validators, :scope_attr
+    attr_accessor :name, :type, :validator, :type_based_validators, :scope_attr
 
     def initialize(name, type)
       @name = name

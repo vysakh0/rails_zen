@@ -1,4 +1,3 @@
-
 module RailsZen::ModelLeveLValidation
 
   def validate_belongs_to
