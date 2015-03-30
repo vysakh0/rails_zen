@@ -15,13 +15,13 @@ module RailsZen
     end
 
     def get_presence_req
-      puts "Should :#{name} be present always in your record? Reply with y or n eg: y"
-      puts "--------------------------------------------------------------\n\n $->"
+      say "Should :#{name} be present always in your record?\n"
+      say"--------------------------------------------------------------"
+      inp = agree("Reply with y or n")
 
-      if $stdin.gets.strip.downcase == 'y'
-
+      if inp
         @validator = "validates_presence_of"
-        #puts "What should be the default value? If there is no default value enter n"
+        #say "What should be the default value? If there is no default value enter n"
         #val = $stdin.gets.strip
         #if val != 'n'
         #@default_value = val
@@ -33,22 +33,22 @@ module RailsZen
     end
 
     def get_uniqueness_req
-      puts "Should :#{name} be an unique column?\n"
-      puts "-------------------------------------\n\n"
-      puts "Reply with \n
+      say "Should :#{name} be an unique column?\n"
+      say "-------------------------------------\n\n"
+      say "Reply with \n
+                  0 if it is not unique \n
                   1 if it is just unique \n
-                  2 if it is unique with respect to another attr \n
-                  n if it is not unique \n\n $->"
+                  2 if it is unique with respect to another attr \n\n"
 
-      inp = $stdin.gets.strip
+      inp = ask("Please enter", Integer) { |q| q.in = 0..2 }
 
-      if inp == "2"
-        #puts "Setting presence true in your models and migrations"
-        puts "\n#{name} is unique along with ?\n Reply with attr name, if it is a relation reply along with id: eg: user_id \n\n $->"
+      if inp == 2
+        #say "Setting presence true in your models and migrations"
+        say "\n#{name} is unique along with ?\n Reply with attr name\n "
 
-        @scope_attr = $stdin.gets.strip
+        @scope_attr = ask("if it is a relation reply along with id: eg: user_id \n\n $->")
         @validator = "validates_uniqueness_scoped_to"
-      elsif  inp == "1"
+      elsif  inp == 1
         @validator = "validates_uniqueness_of"
       end
     end
@@ -57,14 +57,14 @@ module RailsZen
       if(type == "integer" || type == "decimal")
         @validator_line = "#@validator_line, numericality: true"
 
-        puts "#{name} is an integer do you want to check  \n
+        say "#{name} is an integer do you want to check  \n
                   1 just the numericality? \n
                   2 check if it is only integer\n\n $->
         "
-        input = $stdin.gets.strip
+        input = ask("Please enter", Integer) { |q| q.in = 1..2}
 
         map_input = {
-          "1" => "validate_numericality", "2" => "validate_integer"
+          1 => "validate_numericality", 2 => "validate_integer"
           #"3" => "validate_greater_than", "4" => "validate_lesser_than"
         }
 

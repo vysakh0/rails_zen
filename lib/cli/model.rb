@@ -6,7 +6,6 @@ module RailsZen
       desc "g", "generate model, migration, spec files and step & step validations"
 
       def g(*args)
-        puts args[0]
         #system("rails g model #{args.join(' ')}")
         RailsZen::GivenModelGen.new(args[0], args[1..-1].join(" ")).step_by_step
 

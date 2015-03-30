@@ -1,5 +1,6 @@
 require 'rails_zen/chosen_attr'
 require 'rails_zen/write_to_files'
+require 'highline/import'
 
 module RailsZen
   class GivenModelGen
@@ -30,16 +31,16 @@ module RailsZen
     end
 
     def step_by_step
-      puts "\nThese are your attributes"
-      puts "---------------------------\n"
+      say "\nThese are your attributes"
+      say "---------------------------\n"
 
-      attrs.each_with_index { |attr, i| puts "#{i} #{attr}" }
-      puts "\n\nChoose the one that don't require 'presence true' or 'validations' or uniqueness.\n Enter like this eg: 0 1. \nDo not prese enter after one of the options, make it in a single line \n"
-      puts "----------------------------------\n\n$.> "
+      attrs.each_with_index { |attr, i| say "#{i} #{attr}" }
+      say "\n\nChoose the one that don't require 'presence true' or 'validations' or uniqueness.\n Enter like this eg: 0 1. "
+      say "----------------------------------\n\n$.> "
 
-      @simple_attributes = $stdin.gets.chomp.split
+      @simple_attributes =  ask("Enter (comma sep list)  ", lambda { |str| str.split(/,\s*/) })
 
-      puts "\n\n Great! Lets move on fast..\n\n"
+      say "\n\n Great! Lets move on fast..\n\n"
 
       chosen_attrs.each do |attr_obj|
         attr_obj.get_user_inputs
