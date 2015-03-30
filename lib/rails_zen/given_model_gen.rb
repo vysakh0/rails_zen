@@ -34,13 +34,11 @@ module RailsZen
       say "\nThese are your attributes"
       say "---------------------------\n"
 
-      attrs.each_with_index { |attr, i| say "#{i} #{attr}" }
-      say "\n\nChoose the one that don't require 'presence true' or 'validations' or uniqueness.\n Enter like this eg: 0 1. "
-      say "----------------------------------\n\n$.> "
+      attrs.each_with_index { |attr, i| puts "#{i} #{attr}" }
+      say "\n\nChoose the one that don't require 'presence true' or 'validations' or uniqueness.\n Enter like this eg: 0,1. or just enter "
+      say "\n----------------------------------\n\n$.> "
 
       @simple_attributes =  ask("Enter (comma sep list)  ", lambda { |str| str.split(/,\s*/) })
-
-      say "\n\n Great! Lets move on fast..\n\n"
 
       chosen_attrs.each do |attr_obj|
         attr_obj.get_user_inputs

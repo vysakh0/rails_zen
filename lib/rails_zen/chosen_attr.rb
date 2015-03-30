@@ -15,7 +15,7 @@ module RailsZen
     end
 
     def get_presence_req
-      say "Should :#{name} be present always in your record?\n"
+      say "\n\nShould :#{name} be present always in your record?\n"
       say"--------------------------------------------------------------"
       inp = agree("Reply with y or n")
 

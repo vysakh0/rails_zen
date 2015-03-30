@@ -6,7 +6,7 @@ class Yolo
   include Thor::Actions
 
   def yo
-    pp
+    puts "hello world"
   end
   def pp
     gsub_file "cool.rb", /\D+title/ do |match|
