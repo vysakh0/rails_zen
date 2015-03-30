@@ -1,4 +1,5 @@
 require 'stringio'
+require 'highline/import'
 
 module RailsZen
   class ChosenAttr
@@ -14,10 +15,10 @@ module RailsZen
     end
 
     def get_presence_req
-      puts "Must :#{name} be present always? Reply with y or n eg: y"
+      puts "Should :#{name} be present always in your record? Reply with y or n eg: y"
+      puts "--------------------------------------------------------------\n\n $->"
 
       if $stdin.gets.strip.downcase == 'y'
-        puts "Setting presence true in your models and migrations"
 
         @validator = "validates_presence_of"
         #puts "What should be the default value? If there is no default value enter n"
@@ -32,18 +33,19 @@ module RailsZen
     end
 
     def get_uniqueness_req
-      puts "Must :#{name} be unique? Reply with \n
+      puts "Should :#{name} be an unique column?\n"
+      puts "-------------------------------------\n\n"
+      puts "Reply with \n
                   1 if it is just unique \n
                   2 if it is unique with respect to another attr \n
-                  n if it is not unique"
+                  n if it is not unique \n\n $->"
 
       inp = $stdin.gets.strip
 
-      puts "this is the input"
-      puts inp
       if inp == "2"
         #puts "Setting presence true in your models and migrations"
-        puts "#{name} is unique along with ? Reply with attr name, if it is a relation reply along with id: eg: user_id "
+        puts "\n#{name} is unique along with ?\n Reply with attr name, if it is a relation reply along with id: eg: user_id \n\n $->"
+
         @scope_attr = $stdin.gets.strip
         @validator = "validates_uniqueness_scoped_to"
       elsif  inp == "1"
@@ -57,7 +59,7 @@ module RailsZen
 
         puts "#{name} is an integer do you want to check  \n
                   1 just the numericality? \n
-                  2 check if it is only integer\n
+                  2 check if it is only integer\n\n $->
         "
         input = $stdin.gets.strip
 

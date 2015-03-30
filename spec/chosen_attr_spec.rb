@@ -22,7 +22,7 @@ RSpec.describe RailsZen::ChosenAttr do
           $stdin = StringIO.new("y\n n\n")
         end
 
-        it "sets validator to validates_presence_of" do
+        fit "sets validator to validates_presence_of" do
           subject.get_user_inputs
           expect(subject.validator).to eq "validates_presence_of"
         end
