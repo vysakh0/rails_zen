@@ -27,14 +27,23 @@ RSpec.describe RailsZen::WriteToMigration do
 
   describe "#write!" do
 
-    fit "appends to the file" do
-
+    before do
       loc = double('file')
       allow(File).to receive(:open).with(any_args) { loc }
       allow(File).to receive(:binread).with(any_args) { file }
+      allow(Dir).to receive(:glob).with(any_args) {["2023_create_users.rb"]}
+    end
+    it "appends to the line" do
 
       @write_to_migration.write!
       expect(file).to include("t.string :email, required: true, null: false")
+    end
+    fit "inserts an index line to the file" do
+
+      @write_to_migration.scope_attr = "post_id"
+      @write_to_migration.write!
+
+      expect(file).to include("t.index [:user_id, :post_id]")
     end
   end
 end

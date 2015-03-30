@@ -5,9 +5,9 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
   def write!
     line = send(@validator)
     append_to_line(line) if @validator
-    #if scope_attr
-    #write_to_file file_name, "t.index [:#{name}_id, #{scope_attr}]"
-    #end
+    if scope_attr
+      inject_into_file file_name, "t.index [:#{@model_name}_id, :#{scope_attr}]\n", before: "t.timestamps"
+    end
   end
   def append_to_line(line)
     gsub_file file_name, /^\D+#{name}/ do |match|
@@ -16,7 +16,8 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
   end
 
   def file_name
-    Dir["db/migrate/*create_#{@model_name}*.rb"][0]
+    Dir.glob("db/migrate/*create_#{@model_name}s.rb")[0]
+    # need to use pluralize here
   end
 
   private
