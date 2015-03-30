@@ -13,11 +13,15 @@ RSpec.describe RailsZen::WriteToModel do
 
   it { expect(@write_to_model).to respond_to :write!}
 
-  describe "#write" do
+  describe "#write!" do
 
-    fit "appends to the file" do
+    it "appends to the file" do
 
-      allow(File).to receive(:binread).with(anything()) { file }
+      loc = double('file')
+      allow(File).to receive(:open).with(any_args) { loc }
+      allow(File).to receive(:binread).with(any_args) { file }
+
+      allow(@write_to_model).to receive(:file_name) { '/randompath/yo'}
 
       @write_to_model.write!
       expect(file).to include("validates :email, presence: true")

@@ -3,15 +3,22 @@ require "rails_zen/write_to_files/write_to_model"
 class RailsZen::WriteToMigration < RailsZen::WriteToModel
 
   def write!
-    append_to_line file_name, sends(@validator) if @validator
-    if scope_attr
-    write_to_file file_name, "t.index [:#{name}_id, #{scope_attr}]"
+    line = send(@validator)
+    append_to_line(line) if @validator
+    #if scope_attr
+    #write_to_file file_name, "t.index [:#{name}_id, #{scope_attr}]"
+    #end
+  end
+  def append_to_line(line)
+    gsub_file file_name, /^\D+#{name}/ do |match|
+      match << line
     end
   end
-  private
+
   def file_name
-    ls_grep = "db/migrate/*create_#{@model_name.pluralize}.rb"
+    Dir["db/migrate/*create_#{@model_name}*.rb"][0]
   end
+
   private
   def validates_presence_of
     ", required: true, null: false"

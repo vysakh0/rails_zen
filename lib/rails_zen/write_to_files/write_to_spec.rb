@@ -6,8 +6,12 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
   include RailsZen::ModelLeveLValidationSpec
 
   def write!
-    write_to_file file_name, sends(@validator) if @validator
-    write_to_file file_name, sends(@type_based_validators) if @type_based_validators
+
+    insert_with(send(@validator)) if @validator
+    insert_with(send(@type_based_validator)) if @type_based_validator
+  end
+  def insert_with(output)
+    inject_into_file(file_name, "  #{output}\n", after: "RSpec.describe #{@model_name.capitalize}, type: :model do\n" )
   end
 
   private
