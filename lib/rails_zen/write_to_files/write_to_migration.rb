@@ -3,8 +3,10 @@ require "rails_zen/write_to_files/write_to_model"
 class RailsZen::WriteToMigration < RailsZen::WriteToModel
 
   def write!
-    line = send(@validator)
-    append_to_line(line) if @validator
+    if @validator
+      line = send(@validator)
+      append_to_line(line)
+    end
     if scope_attr
       inject_into_file file_name, "t.index [:#{@model_name}_id, :#{scope_attr}]\n", before: "t.timestamps"
     end
@@ -28,7 +30,7 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
     ", required: true, null: false, index: true"
   end
   def validates_uniqueness_scoped_to
-     ", required: true, null: false, index: true"
+    ", required: true, null: false, index: true"
   end
 end
 
