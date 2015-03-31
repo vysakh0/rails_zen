@@ -35,12 +35,13 @@ RSpec.describe RailsZen::WriteToMigration do
     end
     it "appends to the line" do
 
+      @write_to_migration.scope_attr = []
       @write_to_migration.write!
       expect(file).to include("t.string :email, required: true, null: false")
     end
     fit "inserts an index line to the file" do
 
-      @write_to_migration.scope_attr = { "post_id" => "comment_id" }
+      @write_to_migration.scope_attr = [:post_id, :comment_id]
       @write_to_migration.write!
 
       expect(file).to include("t.index [:post_id, :comment_id]")

@@ -8,10 +8,8 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
       line = send(@validator)
       append_to_line(line)
     end
-    if scope_attr
-      scope_attr.each_key do |key|
-        inject_into_file file_name, "t.index [:#{key}, :#{scope_attr[key]}]\n", before: "t.timestamps"
-      end
+    if scope_attr.any?
+      inject_into_file file_name, "t.index #{scope_attr.to_s}\n", before: "t.timestamps"
     end
   end
   def append_to_line(line)

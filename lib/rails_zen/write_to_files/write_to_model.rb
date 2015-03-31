@@ -43,7 +43,7 @@ module RailsZen
       "validates :#{name}, presence: true, uniqueness: true"
     end
     def validates_uniqueness_scoped_to
-      "validates_uniqueness_of :#{name}, scope: #{scope_attr}"
+      "validates_uniqueness_of :#{name}, scope: #{scope_attr.to_s}"
     end
 
   end

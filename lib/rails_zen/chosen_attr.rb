@@ -8,6 +8,7 @@ module RailsZen
     def initialize(name, type)
       @name = name
       @type = type
+      @scope_attr = []
     end
     def get_user_inputs
       get_presence_req
@@ -46,12 +47,14 @@ module RailsZen
         #say "Setting presence true in your models and migrations"
         say "\n#{name} is unique along with ?\n Reply with attr name\n "
 
-        @scope_attr= {}
         if is_relation?
-          key = "#{name}_id" unless name.end_with? "_id"
+          @scope_attr << "#{name}_id" unless name.end_with? "_id"
         end
 
-        @scope_attr[key] = ask("if it is a relation reply along with id: eg: user_id \n\n $->")
+        say("if it is a relation reply along with id: eg: user_id \n\n $->")
+        @scope_attr << ask("Enter (comma sep list)  ", lambda { |str| str.split(/,\s*/) })
+        @scope_attr = @scope_attr.flatten.map(&:to_sym)
+
         @validator = "validates_uniqueness_scoped_to"
       elsif  inp == 1
         @validator = "validates_uniqueness_of"
