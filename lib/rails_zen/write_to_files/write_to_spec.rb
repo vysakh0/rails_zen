@@ -39,6 +39,7 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
     "it { #{@model_name}; is_expected.to validate_uniqueness_of(:#{name})}"
   end
   def validates_uniqueness_scoped_to
-    "it { #{@model_name}; is_expected.to validate_uniqueness_of(:#{name}).scoped_to(:#{scope_attr.to_s})}"
+    "it { #{@model_name}; is_expected.to validate_uniqueness_of(:#{scope_attr[0]}).scoped_to(#{resolve_scope})}"
   end
+
 end

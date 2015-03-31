@@ -32,6 +32,32 @@ RSpec.describe RailsZen::WriteToSpec do
 
       @write_to_spec.write!
       expect(file).to include "it { user; is_expected.to validate_presence_of(:email)}"
+
+    end
+    context "when one scope" do
+
+      before do
+        @write = build_file_attr("WriteToSpec", [:post_id, :comment_id], "validates_uniqueness_scoped_to")
+      end
+
+      fit "adds a scope to uniqueness" do
+        @write.write!
+
+        expect(file).to include("it { user; is_expected.to validate_uniqueness_of(:post_id).scoped_to(:comment_id)}")
+      end
+    end
+
+    context "when multiple scopes" do
+
+      before do
+        @write = build_file_attr("WriteToSpec", [:post_id, :comment_id, :score], "validates_uniqueness_scoped_to")
+      end
+
+      fit "adds a scope to uniqueness" do
+        @write.write!
+
+        expect(file).to include("it { user; is_expected.to validate_uniqueness_of(:post_id).scoped_to([:comment_id, :score])}")
+      end
     end
   end
 end
