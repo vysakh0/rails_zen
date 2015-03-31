@@ -15,14 +15,23 @@ RSpec.describe RailsZen::WriteToSpec do
 
   describe "#write!" do
 
-    it "appends to the file" do
+    before do
 
-      loc = double('file')
-      allow(File).to receive(:open).with(any_args) { loc }
+      @loc = double('file')
+      allow(File).to receive(:open).with(any_args) { @loc }
       allow(File).to receive(:binread).with(any_args) { file }
+      allow(File).to receive(:foreach).with(any_args).and_return(@loc)
+      allow(@loc).to receive(:grep).with(any_args).and_return([])
+    end
+    it "inserts factory girl instance" do
 
       @write_to_spec.write!
-      expect(file).to include("it { is_expected.to validate_presence_of(:email)}")
+      expect(file).to include("FactoryGirl.create(:user)")
+    end
+    it "appends to the file" do
+
+      @write_to_spec.write!
+      expect(file).to include "it { user; is_expected.to validate_presence_of(:email)}"
     end
   end
 end

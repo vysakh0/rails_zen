@@ -12,6 +12,7 @@ module RailsZen
 
 
     def write!
+
       if @validator
         output = send(@validator)
         if type_num?

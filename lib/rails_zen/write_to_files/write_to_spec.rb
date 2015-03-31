@@ -6,8 +6,14 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
   include RailsZen::ModelLeveLValidationSpec
 
   def write!
+    if @validator
+      adding_to_file!(send(@validator))
+      unless File.foreach("spec/models/#{@model_name}_spec.rb").grep(factory_girl_match).any?
+        adding_to_file!(factory_method)
+      end
 
-    adding_to_file!(send(@validator)) if @validator
+    end
+
     adding_to_file!(send(@type_based_validator)) if @type_based_validator
   end
   def adding_to_file!(output)
@@ -15,17 +21,24 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
   end
 
   private
+  def factory_girl_match
+    Regexp.new("FactoryGirl.create(:#{@model_name})")
+  end
+  def factory_method
+    "let(:#{@model_name}) { FactoryGirl.create(:#{@model_name}) }"
+  end
+
   def file_name
     "spec/models/#{@model_name}_spec.rb"
   end
 
   def validates_presence_of
-    "it { is_expected.to validate_presence_of(:#{name})}"
+    "it { #{@model_name}; is_expected.to validate_presence_of(:#{name})}"
   end
   def validates_uniqueness_of
-    "it { is_expected.to validate_uniqueness_of(:#{name})}"
+    "it { #{@model_name}; is_expected.to validate_uniqueness_of(:#{name})}"
   end
   def validates_uniqueness_scoped_to
-    "it { is_expected.to validate_uniqueness_of(:#{name}).scoped_to(:#{scope_attr})}"
+    "it { #{@model_name}; is_expected.to validate_uniqueness_of(:#{name}).scoped_to(:#{scope_attr})}"
   end
 end
