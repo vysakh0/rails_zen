@@ -5,10 +5,10 @@
 A step by step generator. This will get *uniqueness*, *validations*  from you, and write
 the appropriate files (model, migration, model_spec).
 
-The specs generated here, assumes you are using
+The specs generated here assumes you are using
 
 - Rspec (>3.0)
-- Should matchers
+- Shoulda matchers
 - FactoryGirl
 
 *NOTE*: You need to use this app at the root of your rails directory
@@ -45,15 +45,18 @@ Or install it yourself as:
     rails_zen model act calculator sum
 
 - When you want to add a method to your model, you could invoke this command.
-- This will also get
-   - what the method does
-   - the argument names and a sample argument with an output
+
+- This will get inputs from you such as:
+    - what the method does
+    - the argument names
+    - sample argument with a corresponding output
+
 - Based on these input, a skeleton method will be written to your model file and model spec file
 
-**OPTIONS**: If you want to write a class method you can pass --class option like this
+*OPTIONS*: If you want to write a class method you can pass --class option like this
 
 
-        rails_zen model g calculator sum --class
+    rails_zen model g calculator sum --class
 
 #### Use help to see the examples
 
