@@ -30,7 +30,7 @@ Feature: Generate model related things
         #Then the exit status should be 0
         Then the output should contain "Do you have any has_many relations?"
 
-        @focus
+        #@focus
         # file writing part
     #Scenario: No unique attributes, integer and has a relation
         #When I run `rails_zen model g user name:string phone:integer` interactively

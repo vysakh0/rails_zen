@@ -55,7 +55,7 @@ module RailsZen
 
         m = RailsZen::WriteToModel.new
         m.model_name = @name
-        m.adding_to_file!("has_many :#{rel}\n")
+        m.adding_to_file!("  has_many :#{rel}\n")
 
         s = RailsZen::WriteToSpec.new
         s.model_name = @name

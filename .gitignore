@@ -1,4 +1,6 @@
 /.bundle/
+/bin/rspec
+/bin/cucumber
 /.yardoc
 /Gemfile.lock
 /_yardoc/

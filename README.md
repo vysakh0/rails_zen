@@ -1,6 +1,6 @@
 # RailsZen
 
-**AIM**: To save time by giving a boilerplate, and a thought flow
+**AIM**: To save time by giving a boilerplate, and a thought flow.
 
 A step by step generator. This will get *uniqueness*, *validations*  from you, and write
 the appropriate files (model, migration, model_spec).
@@ -12,6 +12,9 @@ The specs generated here assumes you are using
 - FactoryGirl
 
 *NOTE*: You need to use this app at the root of your rails directory
+
+*Disclamier*: Things like mocks, stubs and proper testing might not be possible with this project.
+The aim is to automate as many things as possible, this is not a panacea :) .
 
 ## Installation
 
@@ -63,10 +66,31 @@ Or install it yourself as:
     rails_zen model g help
     rails_zen model act help
 
+### Tip
 
+- Create aliases for these commands in your bashrc or zshrc.
+- I'm using
+
+    alias rzmg="rails_zen model g "
+    alias rzma="rails_zen model act "
+
+```bash
+rzmg user name:string score:integer
+rzma user calculate_score
+```
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/rails_zen/fork )
+
+    bundle binstub rspec-core
+    bundle binstub cucumber
+
+    bin/rspec
+    bin/cucumber
+
+- This project uses [thor](https://github.com/erikhuda/thor/). You could [refer this blog post](willschenk.com/making-a-command-line-utility-with-gems-and-thor/) to get a quick idea.
+- To read the source code, start with `lib/cli.rb` & `bin/rails_zen`
+
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
