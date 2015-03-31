@@ -13,8 +13,8 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
     end
   end
   def append_to_line(line)
-    gsub_file file_name, /^\D+#{name}/ do |match|
-      match << line
+    gsub_file file_name, /t.#{attr_type}.+#{name}.*$/ do |match|
+      match = line
     end
   end
 
@@ -25,13 +25,13 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
 
   private
   def validates_presence_of
-    ", required: true, null: false"
+    "t.#{attr_type} :#{name}, required: true, null: false"
   end
   def validates_uniqueness_of
-    ", required: true, null: false, index: true"
+    "t.#{attr_type} :#{name}, required: true, null: false, index: true"
   end
   def validates_uniqueness_scoped_to
-    ", required: true, null: false, index: true"
+    "t.#{attr_type} :#{name}, required: true, null: false, index: true"
   end
 end
 

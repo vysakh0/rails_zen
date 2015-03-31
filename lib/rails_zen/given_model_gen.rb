@@ -42,7 +42,7 @@ module RailsZen
           final_attr_objs << RailsZen::ChosenAttr.new(attr, type)
         end
       end
-      final_attr_objs.partition { |attr| attr.scope_attr == false}.flatten
+      final_attr_objs
     end
 
 
