@@ -1,5 +1,5 @@
 require "rails_zen/write_to_files/write_to_model"
-#require 'active_support/core_ext/string'
+require 'active_support/core_ext/string'
 
 class RailsZen::WriteToMigration < RailsZen::WriteToModel
 
@@ -19,7 +19,7 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
   end
 
   def file_name
-    Dir.glob("db/migrate/*create_#{@model_name}.rb")[0]
+    Dir.glob("db/migrate/*create_#{@model_name.pluralize}.rb")[0]
     # need to use pluralize here
   end
 

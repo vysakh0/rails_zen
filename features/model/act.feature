@@ -32,8 +32,15 @@ Feature: Create a function & related spec for the model
         When I close the stdin stream
         Then the output should contain "Enter the expected output for the previously entered arguments. eg: 3"
 
-    #@focus
-    #Scenario: Enters the end result
+    Scenario: Enters no arguments
+        When I run `rails_zen model act greet hello` interactively
+        And I type "says hello"
+        And I type ""
+        When I close the stdin stream
+        Then the output should not contain "Give example arguments"
+
+        #@focus
+        #Scenario: Enters the end result
         #When I run `rails_zen model act user sum` interactively
         #And I type "returns sum of two numbers"
         #And I type "a,b"

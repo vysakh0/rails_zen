@@ -31,12 +31,18 @@ Or install it yourself as:
 
 ## Usage
 
-#### rails_zen model g user name:string score:integer
+### COMMANDS
+
+####  model g (generate)
+
+    rails_zen model g user name:string score:integer
 
 - Once you enter this command, you will have few questions asked such as what to validate, which attribute is unique.
 - Based on your input, the model, model_spec and migration files will be written
 
-#### rails_zen model act calculator sum
+#### model act (action)
+
+    rails_zen model act calculator sum
 
 - When you want to add a method to your model, you could invoke this command.
 - This will also get
@@ -48,6 +54,12 @@ Or install it yourself as:
 
 
         rails_zen model g calculator sum --class
+
+#### Use help to see the examples
+
+    rails_zen model g help
+    rails_zen model act help
+
 
 ## Contributing
 

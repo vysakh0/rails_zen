@@ -23,9 +23,9 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
     "it { is_expected.to validate_presence_of(:#{name})}"
   end
   def validates_uniqueness_of
-    "it { is_expected.to validates_uniqueness_of(:#{name})}"
+    "it { is_expected.to validate_uniqueness_of(:#{name})}"
   end
   def validates_uniqueness_scoped_to
-    "it { is_expected.to validates_uniqueness_of(:#{name}).scoped_to(:#{scope_attr})}"
+    "it { is_expected.to validate_uniqueness_of(:#{name}).scoped_to(:#{scope_attr})}"
   end
 end

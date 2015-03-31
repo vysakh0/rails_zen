@@ -15,10 +15,10 @@ module RailsZen
 
 
       }
-      def g(model, *attrs)
+      def g(model_name, *attrs)
         attrs = attrs.join(' ')
-        #system("rails g model #{attrs}")
-        RailsZen::GivenModelGen.new(model, attrs).step_by_step
+        system("rails g model #{model_name} #{attrs}")
+        RailsZen::GivenModelGen.new(model_name, attrs).step_by_step
 
         #check_has_many
       end
