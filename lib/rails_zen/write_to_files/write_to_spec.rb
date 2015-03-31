@@ -7,10 +7,10 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
 
   def write!
 
-    insert_with(send(@validator)) if @validator
-    insert_with(send(@type_based_validator)) if @type_based_validator
+    adding_to_file!(send(@validator)) if @validator
+    adding_to_file!(send(@type_based_validator)) if @type_based_validator
   end
-  def insert_with(output)
+  def adding_to_file!(output)
     inject_into_file(file_name, "  #{output}\n", after: "RSpec.describe #{@model_name.capitalize}, type: :model do\n" )
   end
 

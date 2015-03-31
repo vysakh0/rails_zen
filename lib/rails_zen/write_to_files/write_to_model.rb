@@ -17,11 +17,15 @@ module RailsZen
         output = send(@validator)
         if type_num?
           type_output = send(@type_based_validators)
-          inject_into_class(file_name, "  #{output + type_output}\n" )
+          adding_to_file!("  #{output + type_output}\n" )
         else
-          inject_into_class file_name, @model_name.capitalize, "  #{output}\n"
+          adding_to_file!("  #{output}\n")
         end
       end
+    end
+
+    def adding_to_file!(line)
+      inject_into_class(file_name, model_name.capitalize, line)
     end
 
     private
@@ -30,7 +34,7 @@ module RailsZen
       @attr_type == "integer" || @attr_type == "decimal"
     end
     def file_name
-      "app/models/#{@model_name}.rb"
+      "app/models/#{model_name}.rb"
     end
     def validates_presence_of
       "validates :#{name}, presence: true"
