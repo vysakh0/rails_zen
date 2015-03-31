@@ -26,7 +26,7 @@ module RailsZen
       desc "act MODELNAME NAME ", "create an actions and action spec for a model"
       option :class
       def act(model_name, action_name)
-        RailsZen::ModelAction.new(action_name, options[:class], model_name)
+        RailsZen::ModelAction.new(action_name, options[:class], model_name).write!
       end
     end
   end

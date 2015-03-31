@@ -36,7 +36,7 @@ module RailsZen
 
       @arg_names = ask("Enter (comma sep) list", lambda { |str| str.split(/,\s*/) })
 
-      say "Give an example argument inputs\n"
+      say "Give example arguments inputs\n"
 
       @args =  ask("Enter (comma sep list). Eg: 1,2 ", lambda { |str| str.split(/,\s*/) })
 

@@ -5,8 +5,7 @@ module RailsZen
   class WriteToModel
 
 
-    attr_accessor :name, :scope_attr, :validator, :type_based_validators, :model_name, :attr_type
-
+    attr_accessor :name, :scope_attr, :validator, :type_based_validators, :model_name, :attr_type, :file_name
     include RailsZen::ModelLeveLValidation
     include Thor::Base
     include Thor::Actions
@@ -25,16 +24,17 @@ module RailsZen
     end
 
     def adding_to_file!(line)
+      puts "The file name is #{file_name}"
       inject_into_class(file_name, model_name.capitalize, line)
     end
 
+    def file_name
+      "app/models/#{model_name}.rb"
+    end
     private
 
     def type_num?
       @attr_type == "integer" || @attr_type == "decimal"
-    end
-    def file_name
-      "app/models/#{model_name}.rb"
     end
     def validates_presence_of
       "validates :#{name}, presence: true"
