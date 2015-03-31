@@ -46,7 +46,8 @@ module RailsZen
         #say "Setting presence true in your models and migrations"
         say "\n#{name} is unique along with ?\n Reply with attr name\n "
 
-        @scope_attr = ask("if it is a relation reply along with id: eg: user_id \n\n $->")
+        @scope_attr= {}
+        @scope_attr[name] = ask("if it is a relation reply along with id: eg: user_id \n\n $->")
         @validator = "validates_uniqueness_scoped_to"
       elsif  inp == 1
         @validator = "validates_uniqueness_of"

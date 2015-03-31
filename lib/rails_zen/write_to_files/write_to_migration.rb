@@ -9,7 +9,9 @@ class RailsZen::WriteToMigration < RailsZen::WriteToModel
       append_to_line(line)
     end
     if scope_attr
-      inject_into_file file_name, "t.index [:#{@model_name}_id, :#{scope_attr}]\n", before: "t.timestamps"
+      scope_attr.each_key do |key|
+        inject_into_file file_name, "t.index [:#{key}, :#{scope_attr[key]}]\n", before: "t.timestamps"
+      end
     end
   end
   def append_to_line(line)

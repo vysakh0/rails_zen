@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = RailsZen::VERSION
   spec.authors       = ["Vysakh Sreenivasan"]
   spec.email         = ["diplomatv@gmail.com"]
-  spec.summary       = %q{Interactive rails generator .}
-  spec.description   = %q{Create boilerplate validation in models, specs, migrations.}
-  spec.homepage      = ""
+  spec.summary       = %q{Interactive rails generator generating files (models, migration) and related specs.}
+  spec.description   = %q{Automate the writing of validations, relations in files and specs. Create boilerplate validation in models, specs, migrations. This specs are generated based on rspec, shoulda-matchers and factorygirl }
+  spec.homepage      = "http://github.com/vysakh0/rails_zen"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
