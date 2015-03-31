@@ -47,7 +47,11 @@ module RailsZen
         say "\n#{name} is unique along with ?\n Reply with attr name\n "
 
         @scope_attr= {}
-        @scope_attr[name] = ask("if it is a relation reply along with id: eg: user_id \n\n $->")
+        if is_relation?
+          key = "#{name}_id" unless name.end_with? "_id"
+        end
+
+        @scope_attr[key] = ask("if it is a relation reply along with id: eg: user_id \n\n $->")
         @validator = "validates_uniqueness_scoped_to"
       elsif  inp == 1
         @validator = "validates_uniqueness_of"
@@ -71,9 +75,12 @@ module RailsZen
 
         @type_based_validators = map_input[input]
 
-      elsif(type =="belongs_to" || type == "references" || (type.end_with? "_id"))
+      elsif(is_relation?)
         @type_based_validators = "validate_belongs_to"
       end
+    end
+    def is_relation?
+      type =="belongs_to" || type == "references" || (type.end_with? "_id")
     end
   end
 end

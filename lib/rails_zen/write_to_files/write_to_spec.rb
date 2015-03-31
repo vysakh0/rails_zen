@@ -7,10 +7,10 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
 
   def write!
     if @validator
-      adding_to_file!(send(@validator))
       unless File.foreach("spec/models/#{@model_name}_spec.rb").grep(factory_girl_match).any?
         adding_to_file!(factory_method)
       end
+      adding_to_file!(send(@validator))
 
     end
 
