@@ -32,12 +32,11 @@ Feature: Create a function & related spec for the model
         When I close the stdin stream
         Then the output should contain "Enter the expected output for the previously entered arguments. eg: 3"
 
-    @focus
-    Scenario: Enters the end result
-        When I run `rails_zen model act user sum` interactively
-        Given I have all files
-        And I type "returns sum of two numbers"
-        And I type "a,b"
-        And I type "1,2"
-        And I type "3"
-        Then the exit status should be 0
+    #@focus
+    #Scenario: Enters the end result
+        #When I run `rails_zen model act user sum` interactively
+        #And I type "returns sum of two numbers"
+        #And I type "a,b"
+        #And I type "1,2"
+        #And I type "3"
+        #Then For this user model, the exit status should be 0

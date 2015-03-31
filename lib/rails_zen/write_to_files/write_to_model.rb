@@ -24,7 +24,6 @@ module RailsZen
     end
 
     def adding_to_file!(line)
-      puts "The file name is #{file_name}"
       inject_into_class(file_name, model_name.capitalize, line)
     end
 
