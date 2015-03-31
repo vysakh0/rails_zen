@@ -66,6 +66,10 @@ Or install it yourself as:
     rails_zen model g help
     rails_zen model act help
 
+You could see this sample video demonstrating the usage of the gem.
+
+[![Rails_zen](https://i.ytimg.com/vi/rXphSHFXT1M/0.jpg)](http://youtu.be/rXphSHFXT1M)
+
 ### Tip
 
 - Create aliases for these commands in your bashrc or zshrc.
