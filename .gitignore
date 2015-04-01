@@ -13,4 +13,5 @@
 *.so
 *.o
 *.a
+rails_zen*.gem
 mkmf.log

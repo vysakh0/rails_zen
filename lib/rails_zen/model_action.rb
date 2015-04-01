@@ -33,7 +33,7 @@ module RailsZen
     private
 
     def factory_girl_match
-      Regexp.new("FactoryGirl.create(:#{@model})")
+      Regexp.new("FactoryGirl.create\(:#{@model}[\S ]*\)")
     end
 
     def get_necessary_info
@@ -59,6 +59,7 @@ module RailsZen
       %{
       def #{method_with_args}
       end
+
       }
     end
 

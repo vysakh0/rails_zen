@@ -22,7 +22,8 @@ class RailsZen::WriteToSpec < RailsZen::WriteToModel
 
   private
   def factory_girl_match
-    Regexp.new("FactoryGirl.create(:#{@model_name})")
+    #Regexp.new("FactoryGirl.create\(:#{@model_name}")
+    Regexp.new("FactoryGirl.create\(:#{@model}[\S ]*\)")
   end
   def factory_method
     "let(:#{@model_name}) { FactoryGirl.create(:#{@model_name}) }"

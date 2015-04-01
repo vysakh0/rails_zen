@@ -70,13 +70,21 @@ You could see this sample video demonstrating the usage of the gem.
 
 [![Rails_zen](https://i.ytimg.com/vi/rXphSHFXT1M/0.jpg)](http://youtu.be/rXphSHFXT1M)
 
+This demonstrates the usage of *act* command.
+
+![Rails_zen](https://lh4.googleusercontent.com/-i_8yAjCihB4/VRuRleT8fJI/AAAAAAAAEwE/x3VOALftzk0/w640-h480-no/output_optimizedc.gif)
+
+(Currently act does a simple assertion using "eq")
+
 ### Tip
 
 - Create aliases for these commands in your bashrc or zshrc.
 - I'm using
 
+```bash
     alias rzmg="rails_zen model g "
     alias rzma="rails_zen model act "
+```
 
 ```bash
 rzmg user name:string score:integer
@@ -86,11 +94,13 @@ rzma user calculate_score
 
 1. Fork it ( https://github.com/[my-github-username]/rails_zen/fork )
 
+```bash
     bundle binstub rspec-core
     bundle binstub cucumber
 
     bin/rspec
     bin/cucumber
+```
 
 - This project uses [thor](https://github.com/erikhuda/thor/). You could [refer this blog post](willschenk.com/making-a-command-line-utility-with-gems-and-thor/) to get a quick idea.
 - To read the source code, start with `lib/cli.rb` & `bin/rails_zen`
